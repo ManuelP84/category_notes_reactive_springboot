@@ -20,7 +20,7 @@ public class GetAllCategoriesUseCase implements Supplier<Flux<CategoryDto>> {
     public Flux<CategoryDto> get() {
         return categoryRepository
                 .findAll()
-                .map(category -> categoryMapper.convertEntityToDto().apply(category))
-                .switchIfEmpty(Flux.error(() -> new Throwable("No categories found in the DB!")));
+                .map(category -> categoryMapper.convertEntityToDto().apply(category));
+                //.switchIfEmpty(Flux.error(() -> new Throwable("No categories found in the DB!"))
     }
 }
