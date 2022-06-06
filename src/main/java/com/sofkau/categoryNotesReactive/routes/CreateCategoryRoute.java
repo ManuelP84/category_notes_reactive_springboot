@@ -10,6 +10,7 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
+import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 @Configuration
@@ -18,7 +19,7 @@ public class CreateCategoryRoute {
     @Bean
     public RouterFunction<ServerResponse> createCategory(CreateCategoryUseCase createCategoryUseCase){
         return route(
-                POST("api/v1/create"),
+                POST("api/v1/create").and(accept(MediaType.APPLICATION_JSON)),
                 request -> request.bodyToMono(CategoryDto.class)
                         .flatMap(categoryDto -> createCategoryUseCase.apply(categoryDto))
                         .flatMap(categoryDto -> ServerResponse.status(HttpStatus.CREATED)
