@@ -13,6 +13,8 @@ public class NoteDto {
 
     private String id= UUID.randomUUID().toString().substring(0, 10);
 
+    private String categoryId;
+
     private String title;
 
     private String message;

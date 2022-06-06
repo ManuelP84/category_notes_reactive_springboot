@@ -13,6 +13,8 @@ public class Note {
 
     private String id;
 
+    private String categoryId;
+
     private String title;
 
     private String message;

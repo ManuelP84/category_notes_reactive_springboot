@@ -23,4 +23,9 @@ public class Category {
     private String title;
 
     private List<Note> notes;
+
+    public Category insertNote(Note note){
+        this.notes.add(note);
+        return this;
+    }
 }
