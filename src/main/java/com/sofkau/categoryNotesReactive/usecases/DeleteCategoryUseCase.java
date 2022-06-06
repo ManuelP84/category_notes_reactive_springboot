@@ -13,8 +13,6 @@ import java.util.function.Function;
 public class DeleteCategoryUseCase implements Function<String, Mono> {
 
     private final ICategoryRepository categoryRepository;
-    private final CategoryMapper categoryMapper;
-
 
     @Override
     public Mono<Void> apply(String categoryId){
