@@ -11,7 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Note {
 
-    private String id = UUID.randomUUID().toString().substring(0, 5);
+    private String id;
 
     private String title;
 

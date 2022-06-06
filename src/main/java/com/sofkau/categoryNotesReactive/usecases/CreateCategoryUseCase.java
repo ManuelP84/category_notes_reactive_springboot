@@ -25,7 +25,7 @@ public class CreateCategoryUseCase implements Function<CategoryDto, Mono<Categor
     }
 
     private Boolean validateCategoryProps(CategoryDto categoryDto){
-        return categoryDto.getId() != null && categoryDto.getTitle() != null;
+        return categoryDto.getTitle() != null;
     }
 
     private Mono<CategoryDto> validateCategoryDto(CategoryDto categoryDto) {
