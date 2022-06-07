@@ -1,5 +1,6 @@
 package com.sofkau.categoryNotesReactive.usecases;
 
+import com.sofkau.categoryNotesReactive.collection.Category;
 import com.sofkau.categoryNotesReactive.mapper.CategoryMapper;
 import com.sofkau.categoryNotesReactive.mapper.NoteMapper;
 import com.sofkau.categoryNotesReactive.model.CategoryDto;
@@ -24,8 +25,8 @@ public class CreateNoteUseCase implements Function<NoteDto, Mono<CategoryDto>> {
         return categoryRepository
                 .findByCategoryId(noteDto.getCategoryId())
                 .flatMap((category) -> categoryRepository
-                        .save(category.insertNote(noteMapper.convertDtoToEntity().apply(noteDto))))
-                .map(category -> categoryMapper.convertEntityToDto().apply(category))
+                        .save(category.insertNote(noteMapper.convertDtoToEntity().apply(noteDto)).get()))
+                .map(category -> categoryMapper.convertEntityToDto().apply((Category) category))
                 .switchIfEmpty(Mono.error(() -> new Throwable("Category not found!")));
     }
 }

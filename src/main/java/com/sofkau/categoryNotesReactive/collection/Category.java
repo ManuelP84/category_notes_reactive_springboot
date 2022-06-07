@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Stream;
 
 @Data
 @AllArgsConstructor
@@ -24,8 +24,35 @@ public class Category {
 
     private List<Note> notes;
 
-    public Category insertNote(Note note){
+    /*public Category insertNote(Note note){
         this.notes.add(note);
         return this;
+    }*/
+
+    public Optional<Category> insertNote(Note updatedNote){
+        return Stream.of(this)
+                .map(category -> {
+                    Category updatedCategory = new Category();
+                    updatedCategory.setId(category.getId());
+                    updatedCategory.setCategoryId(category.getCategoryId());
+                    updatedCategory.setTitle(category.getTitle());
+                    updatedCategory.setNotes(category.getNotes());
+                    updatedCategory.getNotes().add(updatedNote);
+                    return updatedCategory;
+                })
+                .reduce((resume, category) -> category);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return Objects.equals(id, category.id) && Objects.equals(categoryId, category.categoryId) && Objects.equals(title, category.title) && Objects.equals(notes, category.notes);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, categoryId, title, notes);
     }
 }

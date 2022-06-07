@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
+import java.util.Objects;
 
 @Data
 @AllArgsConstructor
@@ -20,4 +20,17 @@ public class Note {
     private String message;
 
     private Boolean isDone;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Note note = (Note) o;
+        return Objects.equals(id, note.id) && Objects.equals(categoryId, note.categoryId) && Objects.equals(title, note.title) && Objects.equals(message, note.message) && Objects.equals(isDone, note.isDone);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, categoryId, title, message, isDone);
+    }
 }
