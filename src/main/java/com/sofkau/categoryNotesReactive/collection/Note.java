@@ -26,7 +26,7 @@ public class Note {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Note note = (Note) o;
-        return Objects.equals(id, note.id) && Objects.equals(categoryId, note.categoryId) && Objects.equals(title, note.title) && Objects.equals(message, note.message) && Objects.equals(isDone, note.isDone);
+        return Objects.equals(id, note.id);
     }
 
     @Override

@@ -43,12 +43,24 @@ public class Category {
                 .reduce((resume, category) -> category);
     }
 
+    public Boolean isNote(String noteId){
+        return this
+                .getNotes()
+                .stream()
+                .anyMatch(note -> note.getId().equals(noteId));
+    }
+
+    public Category deleteNote(Note noteDeleted) {
+        this.getNotes().remove(noteDeleted);
+        return this;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
-        return Objects.equals(id, category.id) && Objects.equals(categoryId, category.categoryId) && Objects.equals(title, category.title) && Objects.equals(notes, category.notes);
+        return Objects.equals(id, category.id);
     }
 
     @Override
